@@ -1,0 +1,403 @@
+/* =================================================================== */
+/* 1. TEMA DAN VARIABEL WARNA (Dari Header Anda)
+/* =================================================================== */
+:root {
+  --custom-primary-color: #14b5ff;
+  --custom-primary-color-darker: hsl(199, 100%, 44%);
+  --custom-primary-color-lighter: hsl(199, 100%, 64%);
+  --custom-primary-color-rgb: 20, 181, 255;
+  --custom-primary-text-on-bg: #ffffff;
+  --sidebar-width: 260px;
+  --sidebar-width-collapsed: 80px;
+
+  /* Light Theme */
+  --current-bg: #f0f2f5;
+  --current-text: #343a40;
+  --current-text-muted: #6c757d;
+  --current-card-bg: #ffffff;
+  --current-navbar-bg: #ffffff;
+  --current-border-color: #e9ecef;
+  --current-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+  --current-theme-icon: "\f185"; /* Sun */
+}
+
+html[data-theme="dark"] {
+  --custom-primary-color: hsl(199, 100%, 65%);
+  --custom-primary-color-darker: hsl(199, 90%, 55%);
+  --custom-primary-color-lighter: hsl(199, 100%, 75%);
+
+  --current-bg: #161a1d;
+  --current-text: #e0e0e0;
+  --current-text-muted: #adb5bd;
+  --current-card-bg: #1f2327;
+  --current-navbar-bg: #1f2327;
+  --current-border-color: #3b4045;
+  --current-box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  --current-theme-icon: "\f186"; /* Moon */
+}
+
+body {
+  background-color: var(--current-bg);
+  color: var(--current-text);
+  font-family: "Poppins", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.95rem;
+  overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+
+/* =================================================================== */
+/* 2. STRUKTUR LAYOUT UTAMA & RESPONSIVE
+/* =================================================================== */
+.admin-layout-wrapper {
+  display: flex;
+}
+
+.main-content-wrapper {
+  flex-grow: 1;
+  width: 100%;
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease;
+}
+
+.admin-page-content {
+  padding: 1.5rem;
+}
+
+/* --- Tampilan Desktop --- */
+.admin-sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1032; /* Di atas segalanya kecuali overlay mobile */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--current-card-bg);
+  border-right: 1px solid var(--current-border-color);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* --- Tampilan Mobile (lg dan di bawahnya) --- */
+/* --- Tampilan Mobile (lg dan di bawahnya) --- */
+@media (max-width: 991.98px) {
+  .main-content-wrapper {
+    margin-left: 0;
+  }
+
+  /* 1. Pengaturan Sidebar untuk Animasi */
+  .admin-sidebar {
+    position: fixed; /* Penting untuk perilaku di mobile */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px; /* Atur lebar sidebar */
+
+    /* Pastikan z-index PALING TINGGI */
+    z-index: 2;
+
+    /* Sembunyikan ke kiri layar */
+    transform: translateX(-100%);
+    /* Ini adalah kunci animasi yang smooth! */
+    transition: transform 0.35s ease-in-out;
+  }
+
+  /* Tampilkan sidebar saat kelas .active ditambahkan oleh JavaScript */
+  .admin-sidebar.active {
+    transform: translateX(0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.35s ease-in-out;
+    z-index: 2;
+  }
+
+  /* 2. Pengaturan Backdrop Efek Blur */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Efek blur pada elemen di belakangnya */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); /* Untuk browser Safari */
+    /* Latar belakang transparan sebagai fallback & sedikit penggelapan */
+    background-color: rgba(0, 0, 0, 0.2);
+
+    /* Pastikan z-index DI BAWAH sidebar */
+    z-index: 1;
+    transition: opacity 0.35s ease-in-out, visibility 0s 0.35s;
+  }
+
+  .sidebar-overlay.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s ease-in-out;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(40px);
+    z-index: 10;
+  }
+
+  /* Sembunyikan tombol toggler versi desktop */
+  #sidebarToggler {
+    display: none;
+  }
+}
+
+/* =================================================================== */
+/* 3. STYLING KOMPONEN (Sidebar, Navbar, Card, Button)
+/* =================================================================== */
+
+/* --- Navbar (Header Atas) --- */
+.navbar.admin-navbar {
+  background-color: var(--current-navbar-bg);
+  border-bottom: 1px solid var(--current-border-color);
+  padding: 0.75rem 1.5rem;
+}
+.navbar-brand .fa-gem {
+  color: var(--custom-primary-color);
+  font-size: 1.5rem;
+}
+/* Tombol hamburger di mobile */
+.navbar-toggler {
+  border: 1px solid var(--current-border-color);
+}
+.navbar-toggler-icon {
+  background-image: none;
+  color: var(--current-text);
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f0c9"; /* Ikon bars */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+}
+
+/* --- Sidebar --- */
+.sidebar-brand {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+.sidebar-brand a {
+  color: var(--custom-primary-color);
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.sidebar-brand a i {
+  margin-right: 0.75rem;
+}
+.sidebar-nav {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-top: 1rem;
+}
+.sidebar-nav .nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  margin: 0.2rem 0.75rem;
+  color: var(--current-text-muted);
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sidebar-nav .nav-link i.fa-fw {
+  width: 24px;
+  text-align: center;
+  margin-right: 0.9rem;
+  font-size: 1.05rem;
+}
+.sidebar-nav .nav-link:hover {
+  background-color: rgba(var(--custom-primary-color-rgb), 0.1);
+  color: var(--custom-primary-color);
+}
+.sidebar-nav .nav-link.active {
+  background-color: var(--custom-primary-color);
+  color: white;
+}
+.sidebar-user-area {
+  padding: 0.75rem;
+  border-top: 1px solid var(--current-border-color);
+  flex-shrink: 0;
+}
+.sidebar-user-toggle {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  color: var(--current-text);
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+.sidebar-user-toggle:hover {
+  background-color: var(--current-border-color);
+}
+.sidebar-user-toggle .user-name {
+  flex-grow: 1;
+  font-weight: 500;
+}
+.sidebar-user-toggle .toggle-arrow {
+  transition: transform 0.3s ease;
+}
+.sidebar-user-toggle[aria-expanded="true"] .toggle-arrow {
+  transform: rotate(180deg);
+}
+.sidebar-toggler {
+  display: none; /* Disembunyikan karena sudah ada di navbar mobile */
+}
+
+/* --- Tombol Tema --- */
+#themeToggleBtn {
+  font-size: 1.2rem;
+  color: var(--current-text-muted);
+}
+#themeToggleBtn:hover {
+  color: var(--custom-primary-color);
+}
+#themeToggleBtn .fa-solid::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: var(--current-theme-icon);
+}
+
+/* --- Tombol Aksi Utama --- */
+.btn-admin-primary {
+  background: linear-gradient(
+    90deg,
+    var(--custom-primary-color-darker) 0%,
+    var(--custom-primary-color) 100%
+  );
+  border: none;
+  color: var(--custom-primary-text-on-bg) !important;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(var(--custom-primary-color-rgb), 0.15);
+}
+.btn-admin-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--custom-primary-color-rgb), 0.25);
+}
+.btn-admin-primary i {
+  margin-right: 0.5em;
+}
+
+/* --- Kartu Dashboard --- */
+.card {
+  background-color: var(--current-card-bg);
+  border: 1px solid var(--current-border-color);
+  box-shadow: var(--current-box-shadow);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.card.dashboard-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
+}
+html[data-theme="dark"] .card.dashboard-card:hover {
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+}
+.card-icon-wrapper {
+  color: var(--custom-primary-color);
+  margin-right: 1rem;
+}
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--current-text-muted);
+}
+.stat-number {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--current-text);
+}
+.card-link {
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.slide-preview {
+  width: 150px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+}
+.handle {
+  cursor: grab;
+}
+
+/* Styling untuk Page Header yang Bersih */
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Agar tombol turun ke bawah di mobile */
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--current-text);
+  margin: 0;
+}
+
+/* Styling untuk daftar slider yang lebih rapi */
+#sliderList.list-group-flush .list-group-item {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid var(--current-border-color);
+  background-color: transparent;
+}
+#sliderList.list-group-flush .list-group-item:last-child {
+  border-bottom: none;
+}
+
+#sliderList img {
+  width: 100px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+}
+
+#sliderList h6 {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* GANTI CSS LAMA ANDA DENGAN YANG INI: */
+#sliderList.list-group-flush .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Ini agar rapi di HP */
+  gap: 1rem; /* Memberi jarak saat di HP */
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid var(--current-border-color);
+}

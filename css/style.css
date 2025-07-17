@@ -1,0 +1,1189 @@
+:root {
+  /* New Primary Color Scheme - Gradient Based */
+  --custom-primary-gradient: #14b5ff;
+  --custom-primary-color: #14b5ff; /* Base color updated */
+  --custom-primary-color-darker: hsl(
+    199,
+    100%,
+    44%
+  ); /* Derived from #14b5ff's HSL */
+  --custom-primary-color-lighter: hsl(
+    199,
+    100%,
+    64%
+  ); /* Derived from #14b5ff's HSL */
+  --custom-primary-text-on-bg: #ffffff;
+  --custom-primary-color-rgb: 20, 181, 255; /* RGB for #14b5ff */
+
+  /* Light Theme (Default) */
+  --light-bg: #fdfcfa;
+  --light-text: #333;
+  --light-text-muted: #555;
+  --light-card-bg: #ffffff;
+  --light-border-color: #eee;
+  --light-section-bg: #ffffff;
+
+  /* Dark Theme */
+  --dark-bg: #1a1a1a;
+  --dark-text: #f0f0f0;
+  --dark-text-muted: #e9e9e9;
+  --dark-card-bg: #2c2c2c;
+  --dark-border-color: #444;
+  --dark-section-bg: #222222;
+
+  /* Applied variables (will change based on theme) */
+  --current-bg: var(--light-bg);
+  --current-text: var(--light-text);
+  --current-text-muted: var(--light-text-muted);
+  --current-card-bg: var(--light-card-bg);
+  --current-border-color: var(--light-border-color);
+  --current-section-bg: var(--light-section-bg);
+  --current-navbar-bg: #ffffff;
+}
+
+body[data-theme="dark"] {
+  --custom-primary-color: hsl(
+    199,
+    100%,
+    70%
+  ); /* Bright blue for glow base (derived from new primary) */
+  --custom-primary-color-darker: hsl(199, 90%, 60%);
+  --custom-primary-color-lighter: hsl(199, 100%, 80%);
+
+  --current-bg: var(--dark-bg);
+  --current-text: var(--dark-text);
+  --current-text-muted: var(--dark-text-muted);
+  --current-card-bg: var(--dark-card-bg);
+  --current-border-color: var(--dark-border-color);
+  --current-section-bg: var(--dark-section-bg);
+  --current-navbar-bg: #252525;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--current-bg);
+  color: var(--current-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  background-color: var(--current-navbar-bg) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+  font-family: "Poppins", sans-serif; /* Font Changed */
+  font-weight: 700;
+  font-size: 1.3rem; /* Consider adjusting if Poppins looks too big/small here */
+  color: var(--custom-primary-color) !important;
+}
+
+body[data-theme="dark"] .navbar-brand {
+  color: var(--custom-primary-color) !important; /* Glow base color */
+  /* text-shadow removed as per your last CSS */
+}
+
+body[data-theme="dark"] #searchInputNav::placeholder {
+  color: var(--dark-text-muted) !important;
+}
+
+body[data-theme="dark"] .nav-link {
+  color: var(--dark-text-muted) !important;
+}
+body[data-theme="dark"] .text-muted {
+  color: var(--dark-text-muted) !important;
+}
+
+body[data-theme="dark"] .description {
+  color: var(--dark-text-muted) !important;
+}
+
+body[data-theme="dark"] .nav-link:hover,
+body[data-theme="dark"] .nav-link.active {
+  color: var(--custom-primary-color) !important; /* Glow base color */
+  /* text-shadow removed as per your last CSS */
+}
+
+body[data-theme="dark"] .navbar-nav .nav-item .nav-icon {
+  color: var(--dark-text-muted);
+}
+
+body[data-theme="dark"] .navbar-nav .nav-item:hover .nav-icon {
+  color: var(--custom-primary-color); /* Glow base color */
+  /* filter drop-shadow removed as per your last CSS */
+}
+
+body[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28200, 200, 200, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.nav-link {
+  margin-left: 12px;
+  margin-right: 12px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+
+.navbar-nav .nav-item .nav-icon {
+  font-size: 1.2rem;
+  color: var(--light-text-muted);
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item:hover .nav-icon {
+  color: var(--custom-primary-color);
+}
+
+
+/* Theme switcher buttons */
+#themeToggleMobileBtn,
+#themeToggleDesktopBtn {
+  border-color: var(--current-border-color);
+  color: var(--current-text-muted);
+}
+
+#themeToggleMobileBtn:hover,
+#themeToggleDesktopBtn:hover {
+  background: var(--custom-primary-gradient);
+  color: var(--custom-primary-text-on-bg);
+  border-color: transparent;
+}
+
+body[data-theme="dark"] #themeToggleMobileBtn,
+body[data-theme="dark"] #themeToggleDesktopBtn {
+  border-color: var(--dark-border-color);
+  color: var(--dark-text-muted);
+  background-color: var(--dark-card-bg);
+}
+
+body[data-theme="dark"] #themeToggleMobileBtn:hover,
+body[data-theme="dark"] #themeToggleDesktopBtn:hover {
+  background: var(--custom-primary-gradient);
+  color: var(--custom-primary-text-on-bg);
+  border-color: transparent;
+  box-shadow: 0 0 8px 2px hsla(199, 100%, 70%, 0.5),
+    0 0 15px 3px hsla(199, 100%, 70%, 0.3);
+}
+
+/* Add this to your CSS file */
+#wishlistNavIcon {
+  position: relative; /* Establishes a positioning context for the absolute badge */
+  display: inline-block; /* Ensures the anchor tag takes up only necessary space */
+}
+
+#wishlistCountBadge {
+  position: absolute;
+  top: -1px; /* Adjust as needed to move it up */
+  right: -2px; /* Adjust as needed to move it to the right */
+  font-size: 0.7em; /* Often good to make the badge text a bit smaller */
+  line-height: 1; /* Helps in consistent sizing */
+  padding: 0.15em 0.4em; /* Adjust padding if font size changes */
+}
+
+#cartCountBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* Trik untuk memposisikan lencana tepat di sudut */
+  transform: translate(10%, -20%); 
+  
+  font-size: 0.65em;
+  padding: 0.2em 0.5em;
+  line-height: 1;
+}
+/*
+=================================
+Hero Carousel Section
+=================================
+*/
+.hero {
+  position: relative;
+  height: 90vh; /* Tinggi viewport */
+  min-height: 500px;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333; /* Fallback color */
+}
+
+#heroCarousel,
+.carousel-inner,
+.carousel-item,
+.hero-slide-item {
+  height: 100%;
+}
+
+.hero-slide-item {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Overlay lebih gelap agar teks terbaca */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 800px; /* Batasi lebar konten */
+}
+
+.hero-content h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Mengatur style tombol next/prev */
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 3;
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+  }
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+   .card-product .card-body {
+    padding: 0.75rem; /* Perkecil padding di dalam kartu */
+  }
+
+  .card-product .product-name {
+    font-size: 0.85rem; /* Ukuran font judul */
+    white-space: nowrap; /* Mencegah judul turun ke baris kedua */
+    overflow: hidden; /* Sembunyikan teks yang berlebih */
+    text-overflow: ellipsis; /* Tampilkan "..." jika judul terlalu panjang */
+    margin-bottom: 0.25rem;
+   
+  }
+
+  .card-product .price {
+    font-size: 0.9rem; /* Ukuran font harga */
+    font-weight: 600;
+  }
+
+  .card-product .stock-display {
+    font-size: 0.65rem; /* Ukuran font stok */
+  }
+
+  /* Styling untuk tombol ikon kecil di mobile */
+  .card-product .add-to-cart-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+  }
+
+}
+body[data-theme="dark"] .hero .btn-primary-custom {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px hsla(199, 100%, 70%, 0.4);
+}
+
+.hero .btn-primary-custom:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+body[data-theme="dark"] .hero .btn-primary-custom:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 15px hsla(199, 100%, 70%, 0.6);
+}
+
+.section-title {
+  font-family: "Poppins", sans-serif; /* Font Changed */
+  font-weight: 700; /* Kept bold for section headings */
+  color: var(--current-text);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 15px;
+  font-size: 2.5rem; /* Consider adjusting if Poppins looks too big/small */
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3.5px;
+  background: var(--custom-primary-gradient);
+  border-radius: 2px;
+}
+
+body[data-theme="dark"] .section-title {
+  color: var(--dark-text);
+}
+
+body[data-theme="dark"] .section-title::after {
+  filter: drop-shadow(0 0 3px hsla(199, 100%, 60%, 0.7));
+}
+
+.section-subtitle {
+  color: var(--current-text-muted);
+  margin-bottom: 3.5rem;
+  font-size: 1.05rem;
+}
+
+.card-product {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid var(--current-border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--current-card-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-product:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-product .card-img-top-wrapper {
+  position: relative;
+  width: 100%;
+  /* Rasio 1:1 untuk gambar persegi, Anda bisa ubah ke 4/3 untuk sedikit persegi panjang */
+  aspect-ratio: 1 / 1; 
+}
+
+.card-product .card-img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
+}
+
+body[data-theme="dark"] .card-product:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+body[data-theme="dark"] .card-img-top-wrapper {
+  background-color: #333;
+}
+
+.card-img-top {
+  height: 260px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.card-img-top.loaded {
+  opacity: 1;
+}
+
+.card-product:hover .card-img-top.loaded {
+  transform: scale(1.08);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-weight: 600;
+  color: var(--current-text);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  min-height: 44px;
+}
+
+.card-text.description {
+  font-size: 0.85rem;
+  color: var(--current-text-muted);
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  min-height: 50px;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--custom-primary-color);
+}
+
+body[data-theme="dark"] .price {
+  color: var(--custom-primary-color);
+}
+
+.stock-display {
+  font-size: 0.8rem;
+  color: var(--current-text-muted);
+}
+
+.product-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-product:hover .product-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.product-actions .btn-icon {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--light-border-color);
+  color: var(--light-text);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+body[data-theme="dark"] .product-actions .btn-icon {
+  background-color: rgba(50, 50, 50, 0.9);
+  border: 1px solid #555;
+  color: var(--dark-text);
+}
+
+.product-actions .btn-icon:hover {
+  background: var(--custom-primary-gradient);
+  color: var(--custom-primary-text-on-bg);
+  border-color: transparent;
+  transform: scale(1.1);
+}
+
+body[data-theme="dark"] .product-actions .btn-icon:hover {
+  box-shadow: 0 0 6px 1px hsla(199, 100%, 70%, 0.5);
+}
+
+.product-actions .btn-icon .fas.fa-heart {
+  color: var(--custom-primary-color);
+}
+
+body[data-theme="dark"] .product-actions .btn-icon .fas.fa-heart {
+  filter: drop-shadow(0 0 3px var(--custom-primary-color));
+}
+
+.product-actions .btn-icon:hover .fas.fa-heart {
+  color: var(--custom-primary-text-on-bg);
+  filter: none;
+}
+
+/* === ANIMASI OTOMATIS: OPSI 2 (SHIMMER SWEEP) === */
+
+/* 1. Definisikan tahapan animasinya */
+@keyframes shimmer {
+  0% {
+    /* Mulai dari luar kiri */
+    transform: translateX(-100%) skewX(-20deg);
+  }
+  100% {
+    /* Selesai di luar kanan */
+    transform: translateX(200%) skewX(-20deg);
+  }
+}
+
+/* 2. Terapkan animasi ke tombol Checkout */
+#checkoutBtn {
+  position: relative; /* Wajib untuk posisi lapisan kilau */
+  overflow: hidden;   /* Sembunyikan kilau yang keluar dari tombol */
+  
+  background-color: var(--custom-primary-color); /* Atur warna utama Anda */
+  border-color: var(--custom-primary-color);
+}
+
+/* 3. Buat lapisan kilau menggunakan pseudo-element ::before */
+#checkoutBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Lebar dari kilauannya */
+  height: 100%;
+  
+  /* Gradien yang menciptakan efek kilau */
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.572) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  
+  /* Panggil animasi: nama, durasi, jeda antar animasi, perulangan */
+  animation: shimmer 3s ease-in-out infinite;
+  animation-delay: 1s; /* Jeda 1 detik sebelum animasi dimulai */
+}
+
+.btn-primary-custom {
+  background: var(--custom-primary-gradient);
+  border-color: transparent;
+  color: var(--custom-primary-text-on-bg) !important;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body[data-theme="dark"] .btn-primary-custom {
+  box-shadow: 0 0 8px 1px hsla(199, 100%, 65%, 0.4),
+    0 0 12px 2px hsla(199, 100%, 65%, 0.2);
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: var(--custom-primary-gradient);
+}
+
+body[data-theme="dark"] .btn-primary-custom:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 12px 2px hsla(199, 100%, 70%, 0.6),
+    0 0 20px 4px hsla(199, 100%, 70%, 0.3);
+}
+
+.btn-primary-custom:disabled {
+  background-color: #ccc !important;
+  background-image: none !important;
+  border-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+body[data-theme="dark"] .btn-primary-custom:disabled {
+  background-color: #555 !important;
+  background-image: none !important;
+  border-color: #555 !important;
+  color: #888 !important;
+  box-shadow: none;
+}
+
+.quantity-input-group {
+  max-width: 150px;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.quantity-input-group .form-control {
+  text-align: center;
+  background-color: var(--current-card-bg);
+  color: var(--current-text);
+  border-color: var(--current-border-color);
+}
+
+.quantity-input-group .form-control:focus {
+  border-color: var(--custom-primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--custom-primary-color-rgb), 0.25);
+}
+
+.quantity-input-group .btn {
+  background-color: var(--custom-primary-color-lighter);
+  border-color: var(--custom-primary-color-lighter);
+  color: var(--custom-primary-text-on-bg);
+}
+
+body[data-theme="dark"] .quantity-input-group .btn {
+  background-color: var(--custom-primary-color-darker);
+  border-color: var(--custom-primary-color-darker);
+  color: var(--custom-primary-text-on-bg);
+}
+
+.quantity-input-group .btn:hover {
+  background-color: var(--custom-primary-color);
+  border-color: var(--custom-primary-color);
+  color: var(--custom-primary-text-on-bg);
+}
+
+body[data-theme="dark"] .quantity-input-group .btn:hover {
+  background-color: var(--custom-primary-color);
+  border-color: var(--custom-primary-color);
+}
+
+.footer {
+  background: #2c2c2c;
+  color: #ccc;
+  padding: 60px 0 30px;
+  margin-top: 4rem;
+}
+
+body[data-theme="dark"] .footer {
+  background: #1e1e1e;
+  color: #a0a0a0;
+}
+
+.footer .container {
+  text-align: left;
+}
+
+.footer h5 {
+  font-family: "Poppins", sans-serif; /* Font Changed */
+  color: #fff;
+  font-weight: 600; /* Kept bold for footer headings */
+  margin-bottom: 1.5rem;
+}
+
+body[data-theme="dark"] .footer h5 {
+  color: var(--custom-primary-color-lighter);
+}
+
+.footer p {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: var(--custom-primary-color-lighter);
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+body[data-theme="dark"] .footer a {
+  color: var(--custom-primary-color);
+}
+
+body[data-theme="dark"] .footer a:hover {
+  color: var(--custom-primary-color-lighter);
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 0.5rem;
+}
+
+.footer .footer-icon {
+  color: var(--custom-primary-color);
+  margin-right: 10px;
+  width: 20px;
+}
+
+body[data-theme="dark"] .footer .footer-icon {
+  filter: drop-shadow(0 0 3px var(--custom-primary-color));
+}
+
+.footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  margin: 0 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+body[data-theme="dark"] .footer .social-icons a {
+  background-color: rgba(var(--custom-primary-color-rgb), 0.15);
+  color: var(--custom-primary-color-lighter);
+}
+
+.footer .social-icons a:hover {
+  background: var(--custom-primary-gradient);
+  transform: translateY(-3px);
+  color: var(--custom-primary-text-on-bg);
+}
+
+body[data-theme="dark"] .footer .social-icons a:hover {
+  box-shadow: 0 0 8px 1px hsla(var(--custom-primary-color-rgb), 0.7);
+  color: #fff;
+}
+
+.footer .copyright {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+body[data-theme="dark"] .footer .copyright {
+  border-top: 1px solid rgba(var(--custom-primary-color-rgb), 0.2);
+  color: #888;
+}
+
+.search-form .form-control {
+  border-radius: 50px 0 0 50px;
+  border-right: none;
+  padding-left: 1.25rem;
+  background-color: var(--current-card-bg);
+  color: var(--current-text);
+  border-color: var(--current-border-color);
+}
+
+.search-form .form-control:focus {
+  box-shadow: none;
+  border-color: var(--custom-primary-color);
+  background-color: var(--current-card-bg);
+}
+
+.search-form .btn {
+  border-radius: 0 50px 50px 0;
+  background: var(--custom-primary-gradient);
+  border-color: transparent;
+  color: var(--custom-primary-text-on-bg);
+  padding: 0.55rem 1.25rem;
+}
+
+body[data-theme="dark"] .search-form .btn {
+  box-shadow: 0 0 8px 1px hsla(199, 100%, 65%, 0.4);
+}
+
+.search-form .btn:hover {
+  filter: brightness(1.1);
+}
+
+body[data-theme="dark"] .search-form .btn:hover {
+  filter: brightness(1.2);
+  box-shadow: 0 0 10px 2px hsla(199, 100%, 70%, 0.6);
+}
+
+.badge-new {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--custom-primary-gradient) !important;
+  color: var(--custom-primary-text-on-bg) !important;
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 0.4em 0.8em;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+body[data-theme="dark"] .badge-new {
+  box-shadow: 0 0 5px hsla(199, 100%, 70%, 0.7);
+}
+
+.badge-sold-out {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #dc3545 !important;
+  color: #fff !important;
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 0.4em 0.8em;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+#scrollToTopBtn {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 999;
+  border: none;
+  outline: none;
+  background: var(--custom-primary-gradient);
+  color: var(--custom-primary-text-on-bg);
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease,
+    visibility 0.3s ease, box-shadow 0.3s ease;
+}
+
+body[data-theme="dark"] #scrollToTopBtn {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 10px hsla(199, 100%, 70%, 0.5);
+}
+
+#scrollToTopBtn.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#scrollToTopBtn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-4px) scale(1.05);
+}
+
+body[data-theme="dark"] #scrollToTopBtn:hover {
+  filter: brightness(1.25);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 15px hsla(199, 100%, 70%, 0.7);
+}
+
+.about-section {
+  padding: 80px 0;
+  background-color: var(--current-section-bg);
+  transition: background-color 0.3s ease;
+}
+
+.about-section img {
+  border-radius: 12px;
+}
+
+.about-section .lead {
+  font-size: 1.1rem;
+  color: var(--current-text-muted);
+  line-height: 1.7;
+}
+
+.about-section p:not(.lead) {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--current-text-muted);
+}
+
+.filter-sort-bar {
+  background-color: var(--current-card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+  margin-bottom: 2.5rem;
+  transition: background-color 0.3s ease;
+}
+
+body[data-theme="dark"] .filter-sort-bar {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.filter-sort-bar .form-select,
+.filter-sort-bar .form-control {
+  font-size: 0.9rem;
+  background-color: var(--current-bg);
+  color: var(--current-text);
+  border-color: var(--current-border-color);
+}
+
+.filter-sort-bar .form-select:focus,
+.filter-sort-bar .form-control:focus {
+  border-color: var(--custom-primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--custom-primary-color-rgb), 0.25);
+  background-color: var(--current-bg);
+}
+
+.filter-sort-bar label {
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--current-text-muted);
+}
+
+.filter-sort-bar .input-group-text {
+  background-color: var(--current-border-color);
+  border-color: var(--current-border-color);
+  color: var(--current-text-muted);
+}
+
+.modal-content {
+  background-color: var(--current-card-bg);
+  color: var(--current-text);
+  border-radius: 10px;
+  border: 1px solid var(--current-border-color);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--current-border-color);
+}
+
+body[data-theme="dark"] .modal-header {
+  background-color: var(--dark-section-bg);
+  border-bottom: 1px solid var(--dark-border-color);
+}
+
+.modal-title {
+  font-family: "Poppins", sans-serif; /* Font Changed */
+  font-weight: 600; /* Added weight for Poppins as title */
+  color: var(--current-text);
+}
+
+body[data-theme="dark"] .modal-title {
+  color: var(--custom-primary-color-lighter);
+}
+
+.modal-body img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--current-border-color);
+}
+
+.modal-body .price {
+  font-size: 1.8rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--current-border-color);
+}
+
+.recent-wishlist-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--current-border-color);
+}
+
+.recent-wishlist-item:last-child {
+  border-bottom: none;
+}
+
+.recent-wishlist-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.recent-wishlist-item-info {
+  flex-grow: 1;
+}
+
+.recent-wishlist-item-info h6 {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  color: var(--current-text);
+}
+
+.recent-wishlist-item-info p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--custom-primary-color);
+  font-weight: 500;
+}
+
+.recent-wishlist-item .btn-remove-wishlist {
+  color: #dc3545;
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.recent-wishlist-item .btn-remove-wishlist:hover {
+  color: #a71d2a;
+}
+
+#recentlyViewedSection .card-product {
+  margin-bottom: 0;
+}
+
+.toast {
+  background-color: var(--current-card-bg);
+  color: var(--current-text);
+  border: 1px solid var(--current-border-color);
+}
+
+.toast-header {
+  background-color: var(--current-section-bg);
+  color: var(--current-text);
+  border-bottom: 1px solid var(--current-border-color);
+}
+
+body[data-theme="dark"] .toast-header strong {
+  color: var(--custom-primary-color-lighter);
+}
+
+.product-hidden {
+  display: none !important;
+}
+
+/* humberger menu */
+/* --- Tombol Hamburger Kustom --- */
+.hamburger-toggler {
+    width: 35px;
+    height: 24px;
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100; /* Paling atas */
+}
+
+.hamburger-toggler .line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--current-text); /* Warna garis mengikuti tema */
+    display: block;
+    margin: 6px auto;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+}
+
+/* Animasi Tombol Hamburger menjadi 'X' */
+.hamburger-toggler.active .line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.hamburger-toggler.active .line:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-toggler.active .line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* --- Sidebar Mobile --- */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* Lebar sidebar */
+    height: 100%;
+    background-color: var(--current-bg); /* Warna latar mengikuti tema */
+    z-index: 1050;
+    padding: 20px;
+    transform: translateX(-100%); /* Sembunyi di kiri */
+    transition: transform 0.35s ease-in-out;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-sidebar.active {
+    transform: translateX(0); /* Munculkan */
+}
+
+.mobile-sidebar .sidebar-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--current-border-color);
+}
+.mobile-sidebar .sidebar-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.mobile-sidebar .sidebar-body {
+    padding-top: 15px;
+    overflow-y: auto;
+}
+
+
+
+/* Pastikan badge notifikasi di sidebar mobile terlihat */
+.mobile-sidebar .nav-link {
+    display: flex;
+    align-items: center;
+}
+.mobile-sidebar .badge {
+    font-size: 0.7em;
+}
+
+/* --- Overlay Latar Belakang --- */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px); /* Efek blur modern */
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 1049;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease-in-out, visibility 0s 0.35s;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s ease-in-out;
+}
+/* Jadikan link ikon sebagai 'rumah' untuk badge */
+.navbar .nav-item .nav-link {
+    position: relative;
+    padding-right: 12px !important; /* Beri sedikit ruang agar badge tidak terpotong */
+}
+
+/* Atur posisi badge agar menempel di pojok kanan atas ikon */
+#wishlistCountBadge, 
+#cartCountBadge {
+    position: absolute;
+    top: 4px;   /* Sesuaikan posisi vertikal */
+    right: 0px; /* Sesuaikan posisi horizontal */
+    font-size: 0.6em;
+    padding: 0.25em 0.5em;
+    line-height: 1;
+    transform: none; /* Hapus transform yang lama */
+}
+
+/* Styling untuk Form Pencarian di Filter */
+.search-form-filter {
+    position: relative;
+    width: 100%;
+}
+
+.search-form-filter .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.search-form-filter .form-control {
+    padding-left: 40px; /* Beri ruang untuk ikon */
+    height: 100%;
+}

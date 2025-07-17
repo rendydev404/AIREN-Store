@@ -1,0 +1,5 @@
+# File environment, berisi kunci rahasia
+.env
+
+# Folder dependencies dari composer
+/vendor
